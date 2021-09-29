@@ -136,7 +136,8 @@ function preload(componentName: ComponentName, firebaseApp: App, settingsCallbac
           emitter.complete();
         });
     }),
-    `firebase-sdk:${componentName}:${app.name}`
+    `firebase-sdk:${componentName}:${app.name}`,
+    true
   );
 }
 

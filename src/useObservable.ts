@@ -16,11 +16,12 @@ if (!((globalThis as any) as ReactFireGlobals)._reactFirePreloadedObservables) {
 // Starts listening to an Observable.
 // Call this once you know you're going to render a
 // child that will consume the observable
-export function preloadObservable<T>(source: Observable<T>, id: string) {
+export function preloadObservable<T>(source: Observable<T>, id: string, subscribe: boolean = false) {
   if (preloadedObservables.has(id)) {
     return preloadedObservables.get(id) as SuspenseSubject<T>;
   } else {
     const observable = new SuspenseSubject(source, DEFAULT_TIMEOUT);
+    if (subscribe) observable.subscribe();
     preloadedObservables.set(id, observable);
     return observable;
   }
